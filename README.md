@@ -10,9 +10,12 @@ docker stop club_api && docker rm club_api
 
 ### Setup do terraform
 Criar o terraform.tfvars na raiz do dir terraform com o seguinte conteudo:
-\# AWS Settings
+
+```
+# AWS Settings
 aws_access_key = "..."
 aws_secret_key = "..."
+```
 
 ### Rodando o terraform
 terraform init
