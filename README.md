@@ -1,8 +1,13 @@
 # clubAPI
 
+## Requisitos
+- Terraform
+- Docker
+- EB CLI
+
 ## Local
 ### Startando o ambiente local
-docker build -t club_api . && docker run --publish 8000:8000 --detach --name club_api club_api:latest
+docker build -t club_api . && docker run --publish 80:80 --detach --name club_api club_api:latest
 ### Parando o ambiente local
 docker stop club_api && docker rm club_api
 
@@ -18,5 +23,7 @@ aws_secret_key = "..."
 ```
 
 ### Rodando o terraform
+```
 terraform init
 terraform apply
+```

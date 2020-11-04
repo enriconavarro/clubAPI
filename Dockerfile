@@ -1,8 +1,8 @@
 FROM python:3
 
 WORKDIR /app
-
 ENV PYTHONUNBUFFERED 1
+EXPOSE 80
 
 COPY club_api .
 
