@@ -132,6 +132,7 @@ dmypy.json
 */.terraform
 */terraform.tfvars
 */terraform.tfstate*
+*/.terraform*
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

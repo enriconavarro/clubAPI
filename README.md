@@ -27,3 +27,9 @@ aws_secret_key = "..."
 terraform init
 terraform apply
 ```
+
+### Deploy com eb cli
+```
+eb init -i
+eb deploy
+```

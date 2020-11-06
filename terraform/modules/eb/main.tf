@@ -19,4 +19,10 @@ resource "aws_elastic_beanstalk_environment" "env" {
     name      = "IamInstanceProfile"
     value     = var.profile_name
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "bucket_name"
+    value     = var.bucket_name
+  }
 }

@@ -8,7 +8,12 @@ module "iam" {
     source = "./modules/iam"
 }
 
+module "s3" {
+    source = "./modules/s3"
+}
+
 module "eb" {
     source       = "./modules/eb"
     profile_name = module.iam.profile_name
+    bucket_name  = module.s3.bucket_name
 }
