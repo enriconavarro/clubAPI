@@ -1,7 +1,7 @@
 from django.urls import include, path
 from django.contrib import admin
 from rest_framework import routers
-from club import viewsets
+from core import viewsets
 
 router = routers.DefaultRouter()
 router.register(r'clubs', viewsets.ClubViewSet)

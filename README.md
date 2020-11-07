@@ -1,4 +1,4 @@
-# clubAPI
+# leagueAPI
 
 ## Requisitos
 - Terraform
@@ -7,9 +7,9 @@
 
 ## Local
 ### Startando o ambiente local
-docker build -t club_api . && docker run --publish 80:80 --detach --name club_api club_api:latest
+docker build -t league_api . && docker run --publish 80:80 --detach --name league_api league_api:latest
 ### Parando o ambiente local
-docker stop club_api && docker rm club_api
+docker stop league_api && docker rm league_api
 
 ## AWS
 

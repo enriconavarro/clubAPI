@@ -8,7 +8,7 @@ from .serializers import (
     PlayerListSerializer,
     PlayerDetailSerializer
 )
-from club_api.settings import BACKUP_BUCKET_NAME, DB_FILE_PATH
+from config.settings import BACKUP_BUCKET_NAME, DB_FILE_PATH
 import boto3
 import datetime
 

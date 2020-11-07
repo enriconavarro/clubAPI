@@ -1,5 +1,5 @@
 branch-defaults:
   default:
-    environment: club-api
+    environment: league-api
 global:
   profile: eb-cli

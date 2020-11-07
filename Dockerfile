@@ -4,7 +4,7 @@ WORKDIR /app
 ENV PYTHONUNBUFFERED 1
 EXPOSE 80
 
-COPY club_api .
+COPY league_api .
 
 COPY requirements.txt /tmp/requirements.txt 
 RUN python3 -m pip install -U -r /tmp/requirements.txt

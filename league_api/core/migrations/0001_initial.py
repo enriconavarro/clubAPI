@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('age', models.IntegerField()),
                 ('height', models.FloatField()),
                 ('weight', models.FloatField()),
-                ('club', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='club.Club')),
+                ('club', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Club')),
             ],
         ),
     ]

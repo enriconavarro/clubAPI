@@ -1,10 +1,10 @@
 resource "aws_elastic_beanstalk_application" "app" {
-  name        = "club-api"
-  description = "Elastic beanstalk criado para o club_api"
+  name        = "league-api"
+  description = "Elastic beanstalk criado para o league_api"
 }
 
 resource "aws_elastic_beanstalk_environment" "env" {
-  name                = "club-api"
+  name                = "league-api"
   application         = aws_elastic_beanstalk_application.app.name
   solution_stack_name = "64bit Amazon Linux 2 v3.2.0 running Docker"
 
