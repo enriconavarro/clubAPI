@@ -3,13 +3,15 @@
 ## Requisitos
 - Terraform
 - Docker
+- Docker-compose
 - EB CLI
 
 ## Local
 ### Startando o ambiente local
-docker build -t league_api . && docker run --publish 80:80 --detach --name league_api league_api:latest
+cd local/
+docker-compose up --build -d
 ### Parando o ambiente local
-docker stop league_api && docker rm league_api
+docker-compose down
 
 ## AWS
 
