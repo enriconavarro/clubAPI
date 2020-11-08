@@ -3,3 +3,4 @@ djangorestframework==3.11.0
 django-filter==2.4.0
 django-environ==0.4.5
 boto3==1.12.3
+psycopg2-binary==2.8.6

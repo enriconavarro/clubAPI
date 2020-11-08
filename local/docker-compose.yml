@@ -18,7 +18,7 @@ services:
         environment: 
             db_user: "postgres"
             db_password: "secret"
-            db_endpoint: "localhost"
+            db_endpoint: "postgres"
             db_port: "5432"
             db_name: "league_db"
         ports: 

@@ -78,16 +78,29 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# Application Settings
+ENV = Env()
+BACKUP_BUCKET_NAME = ENV.str('bucket_name', default='LOCAL')
+# DB_USER = ENV.str('db_user')
+# DB_PASS = ENV.str('db_password')
+# DB_ENDPOINT = ENV.str('db_endpoint')
+# DB_PORT = ENV.str('db_port')
+# DB_NAME = ENV.str('db_name')
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'league_db',
+        'USER': 'postgres',
+        'PASSWORD': 'secret',
+        'HOST': 'postgres',
+        'PORT': '5432',
     }
 }
+
 
 
 # Password validation
@@ -127,8 +140,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Application Settings
-ENV = Env()
-BACKUP_BUCKET_NAME = ENV.str('bucket_name', default='LOCAL')
-DB_FILE_PATH = '/app/db.sqlite3'

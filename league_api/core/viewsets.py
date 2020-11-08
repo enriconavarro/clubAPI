@@ -1,27 +1,30 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import Club, Player
+from .models import League, Team, Player
 from .serializers import (
-    ClubListSerializer,
-    ClubDetailSerializer,
+    TeamListSerializer,
+    TeamDetailSerializer,
     PlayerListSerializer,
-    PlayerDetailSerializer
+    PlayerDetailSerializer,
+    LeagueListSerializer,
+    LeagueDetailSerializer,
+    LeagueCreateUpdateSerializer
 )
-from config.settings import BACKUP_BUCKET_NAME, DB_FILE_PATH
+from config.settings import BACKUP_BUCKET_NAME
 import boto3
 import datetime
 
 
-class ClubViewSet(viewsets.ModelViewSet):
+class TeamViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows clubs to be viewed, created, edited or deleted.
+    API endpoint that allows teams to be viewed, created, edited or deleted.
     """
     serializers = {
-        'default': ClubDetailSerializer,
-        'list': ClubListSerializer
+        'default': TeamDetailSerializer,
+        'list': TeamListSerializer
     }
-    queryset = Club.objects.all()
+    queryset = Team.objects.all()
     filter_fields = ('name', 'city')
 
     def get_serializer_class(self):
@@ -37,7 +40,22 @@ class PlayerViewSet(viewsets.ModelViewSet):
         'list': PlayerListSerializer
     }
     queryset = Player.objects.all()
-    filter_fields = ('name', 'club')
+    filter_fields = ('name', 'team')
+
+    def get_serializer_class(self):
+        return self.serializers.get(self.action, self.serializers['default'])
+
+class LeagueViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows leagues to be viewed, created, edited or deleted.
+    """
+    serializers = {
+        'default': LeagueDetailSerializer,
+        'list': LeagueListSerializer,
+        'create': LeagueCreateUpdateSerializer,
+        'update': LeagueCreateUpdateSerializer
+    }
+    queryset = League.objects.all()
 
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.serializers['default'])
@@ -52,15 +70,4 @@ class BackupViewSet(viewsets.ReadOnlyModelViewSet):
         return None
 
     def list(self, request):
-        if BACKUP_BUCKET_NAME == 'LOCAL':
-            return Response(status=status.HTTP_400_BAD_REQUEST, data='Running locally, can`t send the backup to s3 ;)')
-
-        client = boto3.client('s3')
-        name = f'backup_{datetime.datetime.now()}.backup.sqlite3'
-        
-        data = None
-        with open(DB_FILE_PATH, "rb") as bfile:
-            data = bytearray(bfile.read())
-
-        client.put_object(Bucket=BACKUP_BUCKET_NAME, Key=name, Body=data)
-        return Response(status=status.HTTP_200_OK, data=f'Successfully send the backup {name} to S3.')
+        return Response(status=status.HTTP_501_NOT_IMPLEMENTED, data='WIP ;)')
