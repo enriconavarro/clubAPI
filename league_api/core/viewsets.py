@@ -24,7 +24,7 @@ class TeamViewSet(viewsets.ModelViewSet):
         'default': TeamDetailSerializer,
         'list': TeamListSerializer
     }
-    queryset = Team.objects.all()
+    queryset = Team.objects.all().order_by("name")
     filter_fields = ('name', 'city')
 
     def get_serializer_class(self):
@@ -39,7 +39,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
         'default': PlayerDetailSerializer,
         'list': PlayerListSerializer
     }
-    queryset = Player.objects.all()
+    queryset = Player.objects.all().order_by("name")
     filter_fields = ('name', 'team')
 
     def get_serializer_class(self):
@@ -55,7 +55,7 @@ class LeagueViewSet(viewsets.ModelViewSet):
         'create': LeagueCreateUpdateSerializer,
         'update': LeagueCreateUpdateSerializer
     }
-    queryset = League.objects.all()
+    queryset = League.objects.all().order_by("name")
 
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.serializers['default'])
