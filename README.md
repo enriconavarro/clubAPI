@@ -8,10 +8,17 @@
 
 ## Local
 ### Startando o ambiente local
+
+```
 cd local/
 docker-compose up --build -d
+```
+
 ### Parando o ambiente local
+
+```
 docker-compose down
+```
 
 ## AWS
 
