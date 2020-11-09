@@ -1,27 +1,28 @@
 version: "3.7"
 
-services: 
+services:
     postgres:
         hostname: postgres
-        restart: always
         image: postgres
-        environment: 
+        environment:
             POSTGRES_PASSWORD: "secret"
             POSTGRES_DB: "league_db"
-        ports: 
+        ports:
             - "5432:5432"
-        
+
     league_api:
         hostname: league_api
-        build: 
+        build:
             context: ../.
-        environment: 
+        environment:
             db_user: "postgres"
             db_password: "secret"
             db_endpoint: "postgres"
             db_port: "5432"
             db_name: "league_db"
-        ports: 
+        ports:
             - "80:80"
-        volumes: 
+        volumes:
             - ../league_api:/app
+        depends_on:
+            - postgres
