@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import League, Team, Player
@@ -25,7 +25,8 @@ class TeamViewSet(viewsets.ModelViewSet):
         'list': TeamListSerializer
     }
     queryset = Team.objects.all().order_by("name")
-    filter_fields = ('name', 'city')
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'city', 'championships_won', 'coach']
 
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.serializers['default'])
@@ -40,7 +41,8 @@ class PlayerViewSet(viewsets.ModelViewSet):
         'list': PlayerListSerializer
     }
     queryset = Player.objects.all().order_by("name")
-    filter_fields = ('name', 'team')
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'position', 'team__name']
 
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.serializers['default'])
@@ -56,6 +58,8 @@ class LeagueViewSet(viewsets.ModelViewSet):
         'update': LeagueCreateUpdateSerializer
     }
     queryset = League.objects.all().order_by("name")
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'country', 'teams__name', 'teams__player__name']
 
     def get_serializer_class(self):
         return self.serializers.get(self.action, self.serializers['default'])
