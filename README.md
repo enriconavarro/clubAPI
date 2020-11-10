@@ -42,3 +42,7 @@ terraform apply
 eb init -i
 eb deploy
 ```
+
+## Documentação da API
+
+A DOC está disponivel em /swagger-ui/
