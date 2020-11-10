@@ -15,6 +15,7 @@ services:
         build:
             context: ../.
         environment:
+            bucket_name: "LOCAL"
             db_user: "postgres"
             db_password: "secret"
             db_endpoint: "postgres"

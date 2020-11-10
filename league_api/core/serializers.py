@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.reverse import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from .models import League, Team, Player
 
@@ -24,18 +25,28 @@ class PlayerListSerializer(serializers.HyperlinkedModelSerializer):
 
 class TeamDetailSerializer(serializers.HyperlinkedModelSerializer):
     players = serializers.ReadOnlyField()
+    export_url = serializers.SerializerMethodField()
+
+    def get_export_url(self, obj):
+        request = self.context.get('request')
+        return reverse('team-export', args=[obj.id], request=request)
 
     class Meta:
         model = Team
-        fields = ['url', 'id', 'name', 'city', 'championships_won', 'coach', 'number_players', 'players']
+        fields = ['url', 'export_url', 'id', 'name', 'city', 'championships_won', 'coach', 'number_players', 'players']
 
 
 class PlayerDetailSerializer(serializers.HyperlinkedModelSerializer):
     team = serializers.SlugRelatedField(slug_field='name', queryset=Team.objects.all())
+    export_url = serializers.SerializerMethodField()
+
+    def get_export_url(self, obj):
+        request = self.context.get('request')
+        return reverse('player-export', args=[obj.id], request=request)
 
     class Meta:
         model = Player
-        fields = ['url', 'id', 'name', 'age', 'position', 'appearance', 'team']
+        fields = ['url', 'export_url', 'id', 'name', 'age', 'position', 'appearance', 'team']
 
 
 class LeagueDetailSerializer(serializers.HyperlinkedModelSerializer):
@@ -44,10 +55,15 @@ class LeagueDetailSerializer(serializers.HyperlinkedModelSerializer):
     number_teams = serializers.ReadOnlyField()
     most_championships = serializers.ReadOnlyField()
     most_appearances = serializers.ReadOnlyField()
+    export_url = serializers.SerializerMethodField()
+
+    def get_export_url(self, obj):
+        request = self.context.get('request')
+        return reverse('team-export', args=[obj.id], request=request)
 
     class Meta:
         model = League
-        fields = ['url', 'id', 'name', 'country', 'number_teams', 'current_champion', 'most_championships', 'most_appearances', 'teams']
+        fields = ['url', 'export_url', 'id', 'name', 'country', 'number_teams', 'current_champion', 'most_championships', 'most_appearances', 'teams']
 
 class TeamNestedSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
@@ -94,3 +110,26 @@ class LeagueCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = League
         fields = ['url', 'id', 'name', 'country', 'current_champion', 'teams']
+
+class TeamSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    city = serializers.CharField()
+    championships_won = serializers.IntegerField()
+    coach = serializers.CharField()
+    number_players = serializers.IntegerField()
+
+class PlayerSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    age = serializers.IntegerField()
+    position = serializers.CharField()
+    appearance = serializers.IntegerField()
+
+class LeagueSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    country = serializers.CharField()
+    number_teams = serializers.IntegerField()
+    most_championships = serializers.CharField()
+    most_appearances = serializers.CharField()

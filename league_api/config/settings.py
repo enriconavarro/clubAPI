@@ -79,12 +79,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Application Settings
 ENV = Env()
-BACKUP_BUCKET_NAME = ENV.str('bucket_name', default='LOCAL')
-# DB_USER = ENV.str('db_user')
-# DB_PASS = ENV.str('db_password')
-# DB_ENDPOINT = ENV.str('db_endpoint')
-# DB_PORT = ENV.str('db_port')
-# DB_NAME = ENV.str('db_name')
+EXPORT_BUCKET_NAME = ENV.str('bucket_name', default=None)
+DB_USER = ENV.str('db_user', default=None)
+DB_PASS = ENV.str('db_password', default=None)
+DB_ENDPOINT = ENV.str('db_endpoint', default=None)
+DB_PORT = ENV.str('db_port', default=None)
+DB_NAME = ENV.str('db_name', default=None)
+LOCAL_FILE_VAL = "LOCAL"
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -92,11 +93,11 @@ BACKUP_BUCKET_NAME = ENV.str('bucket_name', default='LOCAL')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'league_db',
-        'USER': 'postgres',
-        'PASSWORD': 'secret',
-        'HOST': 'postgres',
-        'PORT': '5432',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASS,
+        'HOST': DB_ENDPOINT,
+        'PORT': DB_PORT,
     }
 }
 
