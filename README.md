@@ -1,5 +1,11 @@
 # leagueAPI
 
+## AWS Infra
+![](./docs/aws_infra.jpg)
+
+## leagueAPI diagram
+![](./docs/league_api_diagram.jpg)
+
 ## Requisitos
 - Terraform
 - Docker
