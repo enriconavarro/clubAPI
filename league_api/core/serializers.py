@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.reverse import reverse
-from django.core.exceptions import ObjectDoesNotExist
 from .models import League, Team, Player
+
 
 class LeagueListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -65,6 +65,7 @@ class LeagueDetailSerializer(serializers.HyperlinkedModelSerializer):
         model = League
         fields = ['url', 'export_url', 'id', 'name', 'country', 'number_teams', 'current_champion', 'most_championships', 'most_appearances', 'teams']
 
+
 class TeamNestedSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(required=False)
     name = serializers.CharField(required=False)
@@ -76,11 +77,12 @@ class TeamNestedSerializer(serializers.ModelSerializer):
         model = Team
         fields = ['id', 'name', 'city', 'championships_won', 'coach']
 
+
 class LeagueCreateUpdateSerializer(serializers.ModelSerializer):
     teams = TeamNestedSerializer(many=True)
     current_champion = serializers.SlugRelatedField(slug_field='name', queryset=Team.objects.all(), required=False)
 
-    def get_or_create_teams(self,teams_data):
+    def get_or_create_teams(self, teams_data):
         teams = []
 
         for team_data in teams_data:
@@ -111,6 +113,7 @@ class LeagueCreateUpdateSerializer(serializers.ModelSerializer):
         model = League
         fields = ['url', 'id', 'name', 'country', 'current_champion', 'teams']
 
+
 class TeamSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
@@ -119,12 +122,14 @@ class TeamSerializer(serializers.Serializer):
     coach = serializers.CharField()
     number_players = serializers.IntegerField()
 
+
 class PlayerSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
     age = serializers.IntegerField()
     position = serializers.CharField()
     appearance = serializers.IntegerField()
+
 
 class LeagueSerializer(serializers.Serializer):
     id = serializers.IntegerField()

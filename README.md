@@ -29,6 +29,9 @@ Criar o terraform.tfvars na raiz do dir terraform com o seguinte conteudo:
 # AWS Settings
 aws_access_key = "..."
 aws_secret_key = "..."
+
+# RDS Settings
+db_pass        = "..."
 ```
 
 ### Rodando o terraform

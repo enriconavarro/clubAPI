@@ -50,7 +50,7 @@ class TeamViewSet(viewsets.ModelViewSet):
             ])
             return Response(status=status.HTTP_200_OK, data=f'Successfully created {team_f_name} file in /tmp.')
         else:
-            team_byte = JSONRenderer().render(teams_string)
+            team_byte = JSONRenderer().render(team_string)
             send_export(EXPORT_BUCKET_NAME,
             [
                 [team_f_name, team_byte]
@@ -91,6 +91,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
             ])
             return Response(status=status.HTTP_200_OK, data=f'Successfully send {player_f_name} to S3 bucket {EXPORT_BUCKET_NAME}.')
 
+
 class LeagueViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows leagues to be viewed, created, edited or deleted.
@@ -120,7 +121,7 @@ class LeagueViewSet(viewsets.ModelViewSet):
             ])
             return Response(status=status.HTTP_200_OK, data=f'Successfully created {league_f_name} file in /tmp.')
         else:
-            league_byte = JSONRenderer().render(leagues_string)
+            league_byte = JSONRenderer().render(league_string)
             send_export(EXPORT_BUCKET_NAME,
             [
                 [league_f_name, league_byte]

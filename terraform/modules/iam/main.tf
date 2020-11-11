@@ -17,7 +17,7 @@ resource "aws_iam_role" "role" {
 EOF
 }
 
-resource "aws_iam_role_policy" "role_policy" {
+resource "aws_iam_role_policy" "role_policy_s3" {
   name = "s3_policy"
   role = aws_iam_role.role.id
 
@@ -28,6 +28,24 @@ resource "aws_iam_role_policy" "role_policy" {
         {
             "Effect": "Allow",
             "Action": "s3:*",
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
+
+resource "aws_iam_role_policy" "role_policy_rds" {
+  name = "rds_policy"
+  role = aws_iam_role.role.id
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rds:*",
             "Resource": "*"
         }
     ]

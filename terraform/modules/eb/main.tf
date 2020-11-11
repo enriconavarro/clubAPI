@@ -25,4 +25,34 @@ resource "aws_elastic_beanstalk_environment" "env" {
     name      = "bucket_name"
     value     = var.bucket_name
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "db_endpoint"
+    value     = var.db_endpoint
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "db_user"
+    value     = var.db_user
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "db_password"
+    value     = var.db_password
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "db_port"
+    value     = var.db_port
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "db_name"
+    value     = var.db_name
+  }
 }

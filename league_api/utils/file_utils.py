@@ -2,6 +2,7 @@ def _write_file(filename, json_string):
     with open(filename, 'w') as tfile:
         tfile.write(json_string)
 
+
 def write_export(exports):
     for export in exports:
         # export[0] = file name
