@@ -46,3 +46,11 @@ eb deploy
 ## Documentação da API
 
 A DOC está disponivel em /swagger-ui/
+
+## Testes
+
+Existem testes unitários e funcionais para todos os models.
+Para executar esses testes:
+```
+python3 manage.py test
+```
